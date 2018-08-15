@@ -1,4 +1,4 @@
-﻿class dotCanvasSettings {
+﻿class CanvasSettings {
     public l: number;
     public z: number;
     public o: number;

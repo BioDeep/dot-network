@@ -5,6 +5,7 @@
     "lib": [ "dom", "es5", "dom.iterable", "scripthost" ],
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
+    "outDir": "obj/",
     "outFile": "./bin/dot-network.js",
     "declaration": true
   },

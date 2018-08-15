@@ -35,7 +35,7 @@
     var r: number;
     var dots: dot[] = [];
     var n: number;
-    var setting: dotCanvasSettings;
+    var setting: CanvasSettings;
     var runFrame: (callback: FrameRequestCallback) => number
 
     function defaultCallback(callback: FrameRequestCallback): number {
@@ -63,7 +63,7 @@
         };
     }
 
-    export function run(settings: dotCanvasSettings = <dotCanvasSettings>{
+    export function run(settings: CanvasSettings = <CanvasSettings>{
         l: n,
         z: -1,
         o: 0.9,
