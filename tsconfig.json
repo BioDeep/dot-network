@@ -6,7 +6,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "obj/",
-    "outFile": "./bin/dot-network.js",
+    "outFile": "./build/dot-network.js",
     "declaration": true
   },
   "exclude": [
