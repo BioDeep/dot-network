@@ -1,5 +1,8 @@
 ﻿module network {
 
+    /**
+     * 进行动画显示的画布对象
+    */
     var uCanvas: HTMLCanvasElement = document.createElement("canvas");
     var uContext: CanvasRenderingContext2D = uCanvas.getContext("2d");
     var f: dot = <dot>{
@@ -18,6 +21,9 @@
         return document.getElementsByTagName(tagName)[0];
     }
 
+    /**
+     * 当窗口大小发生改变的时候，画布的事件
+    */
     function canvasResize() {
         uCanvas.width = window.innerWidth ||
             document.documentElement.clientWidth ||
@@ -29,6 +35,9 @@
         size = [uCanvas.width, uCanvas.height];
     }
 
+    /**
+     * 更新画布上面的一帧动画
+    */
     function update() {
         var w = [f].concat(dots);
         var x, v, A, B, z, y;
@@ -74,6 +83,9 @@
         return 0;
     }
 
+    /**
+     * 注册鼠标设备以及画布更新事件
+    */
     function registerDevice() {
         frameRender = window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -102,6 +114,7 @@
         n: 299
     }) {
 
+        // 初始化画布对象以及鼠标设备
         setting = settings;
         uCanvas.id = `canvas_${settings.canvasId}`;
         uCanvas.style.cssText = `position:fixed; top:0; left:0; z-index: ${settings.zIndex}; opacity: ${settings.opacity}`;
@@ -110,6 +123,8 @@
         canvasResize();
         registerDevice();
 
+        // 创建指定数量的点对象
+        // 位置为随机位置
         for (var p: number = 0; settings.n > p; p++) {
             var w = Math.random() * size[0];
             var h = Math.random() * size[1];
@@ -125,6 +140,7 @@
             });
         }
 
+        // 启动动画的更新线程
         setTimeout(update, 100);
     }
 }
