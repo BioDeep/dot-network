@@ -21,6 +21,10 @@
         return document.getElementsByTagName(tagName)[0];
     }
 
+    function getById(id: string): Element {
+        return document.getElementById(id);
+    }
+
     /**
      * 当窗口大小发生改变的时候，画布的事件
     */
@@ -39,11 +43,13 @@
      * 更新画布上面的一帧动画
     */
     function update() {
-        var w = [f].concat(dots);
-        var x, v, A, B, z, y;
+        var w: dot[] = [f].concat(dots);
 
         uContext.clearRect(0, 0, size[0], size[1]);
         dots.forEach(function (i: dot) {
+            var x: dot;
+            var v: number, A: number, B: number, z: number, y: number;
+
             i.x += i.xa;
             i.y += i.ya;
             i.xa *= i.x > size[0] || i.x < 0 ? -1 : 1;
@@ -106,19 +112,32 @@
         };
     }
 
-    export function run(settings: CanvasSettings = <CanvasSettings>{
-        canvasId: "canvas-network-display",
-        zIndex: -1,
-        opacity: 1,
-        color: "0,104,183",
-        n: 225
-    }) {
+    /**
+     * 运行这个网络画布
+     * 
+     * @param containerId Canvas所进行显示的目标div的id编号，如果这个编号为空值，则默认显示在整个body上面
+     * @param settings 配置参数
+    */
+    export function run(
+        containerId: string = null,
+        settings: CanvasSettings = <CanvasSettings>{
+            canvasId: "canvas-network-display",
+            zIndex: -1,
+            opacity: 1,
+            color: "0,104,183",
+            n: 225
+        }) {
 
         // 初始化画布对象以及鼠标设备
         setting = settings;
         uCanvas.id = `canvas_${settings.canvasId}`;
         uCanvas.style.cssText = `position:fixed; top:0; left:0; z-index: ${settings.zIndex}; opacity: ${settings.opacity}`;
-        getTag("body").appendChild(uCanvas);
+
+        if (!containerId) {
+            getTag("body").appendChild(uCanvas);
+        } else {
+            getById(containerId).appendChild(uCanvas);
+        }
 
         canvasResize();
         registerDevice();
