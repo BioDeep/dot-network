@@ -111,7 +111,7 @@ var network;
             zIndex: -1,
             opacity: 1,
             color: "0,104,183",
-            n: 299
+            n: 225
         }; }
         // 初始化画布对象以及鼠标设备
         setting = settings;
