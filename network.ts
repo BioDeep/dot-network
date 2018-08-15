@@ -1,5 +1,5 @@
 ﻿module network {
-       
+
     function getTag(tagName: string): Element {
         return document.getElementsByTagName(tagName)[0];
     }
@@ -9,7 +9,7 @@
         n = uCanvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     }
 
-    function b() {
+    function update() {
         var w = [f].concat(dots);
         var x, v, A, B, z, y;
 
@@ -24,7 +24,9 @@
                         y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, uContext.beginPath(), uContext.lineWidth = A / 2, uContext.strokeStyle = "rgba(" + setting.c + "," + (A + 0.2) + ")", uContext.moveTo(i.x, i.y), uContext.lineTo(x.x, x.y), uContext.stroke())
                     }
                 } w.splice(w.indexOf(i), 1)
-            }), runFrame(b)
+            })
+
+        frameRender(update);
     }
 
     var uCanvas: HTMLCanvasElement = document.createElement("canvas");
@@ -36,7 +38,7 @@
     var dots: dot[] = [];
     var n: number;
     var setting: CanvasSettings;
-    var runFrame: (callback: FrameRequestCallback) => number
+    var frameRender: (callback: FrameRequestCallback) => number
 
     function defaultCallback(callback: FrameRequestCallback): number {
         window.setTimeout(callback, 1000 / 45);
@@ -44,7 +46,7 @@
     }
 
     function registerDevice() {
-        runFrame = window.requestAnimationFrame ||
+        frameRender = window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
             (<any>window).mozRequestAnimationFrame ||
             (<any>window).oRequestAnimationFrame ||
@@ -64,17 +66,15 @@
     }
 
     export function run(settings: CanvasSettings = <CanvasSettings>{
-        l: n,
+        canvasId: "canvas-network-display",
         z: -1,
-        o: 0.9,
+        o: 1,
         c: "0,104,183",
-        n: 399
+        n: 299
     }) {
 
-        var c = "c_n" + settings.l;
-
         setting = settings;
-        uCanvas.id = c;
+        uCanvas.id = `canvas_${settings.canvasId}`;
         uCanvas.style.cssText = `position:fixed; top:0; left:0; z-index: ${settings.z}; opacity: ${settings.o}`;
         getTag("body").appendChild(uCanvas);
 
@@ -93,10 +93,10 @@
                 xa: q,
                 ya: d,
                 max: 10000
-            })
+            });
         }
 
-        setTimeout(function () { b() }, 100)
+        setTimeout(update, 100);
     }
 
     class dot {

@@ -1,5 +1,5 @@
 ﻿class CanvasSettings {
-    public l: number;
+    public canvasId: string;
     public z: number;
     public o: number;
     public c: string;
