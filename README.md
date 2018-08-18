@@ -1,3 +1,20 @@
-﻿# dot-network
+# dot-network
 
+Usage:
 
+```html
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <script type="text/javascript" src="build/dot-network.js"></script>
+    <script type="text/javascript">
+        network.run();
+    </script>
+</body>
+
+</html>
+```
