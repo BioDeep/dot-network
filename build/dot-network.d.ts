@@ -31,5 +31,11 @@ declare class dot {
     max: number;
 }
 declare module network {
-    function run(settings?: CanvasSettings): void;
+    /**
+     * 运行这个网络画布
+     *
+     * @param containerId Canvas所进行显示的目标div的id编号，如果这个编号为空值，则默认显示在整个body上面
+     * @param settings 配置参数
+    */
+    function run(containerId?: string, settings?: CanvasSettings): void;
 }
